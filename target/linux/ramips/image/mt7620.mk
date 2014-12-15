@@ -236,6 +236,13 @@ define Device/mzk-750dhp
 endef
 TARGET_DEVICES += mzk-750dhp
 
+define Device/tessel
+  DTS := Tessel
+  DEVICE_TITLE := Tessel 2
+  DEVICE_PACKAGES := kmod-mt76
+endef
+TARGET_DEVICES += tessel
+
 define Device/mzk-ex300np
   DTS := MZK-EX300NP
   DEVICE_TITLE := Planex MZK-EX300NP

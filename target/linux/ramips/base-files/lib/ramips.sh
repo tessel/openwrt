@@ -475,6 +475,9 @@ ramips_board_detect() {
 	*"V11ST-FE")
 		name="v11st-fe"
 		;;
+	*"Tessel")
+		name="tessel"
+		;;
 	*"V22RW-2X2")
 		name="v22rw-2x2"
 		;;

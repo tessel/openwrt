@@ -1,0 +1,129 @@
+/dts-v1/;
+
+/include/ "mt7620n.dtsi"
+
+/ {
+	compatible = "wrtnode", "ralink,mt7620n-soc";
+	model = "Tessel";
+
+	chosen {
+		bootargs = "console=ttyS0,115200";
+	};
+
+	palmbus@10000000 {
+                gpio1: gpio@638 {
+                        status = "okay";
+                };
+		gpio2: gpio@660 {
+			status = "okay";
+		};
+
+		gpio3: gpio@688 {
+			status = "okay";
+		};
+
+		spi@b00 {
+			status = "okay";
+
+			m25p80@0 {
+				#address-cells = <1>;
+				#size-cells = <1>;
+				compatible = "s25fl256s1";
+				reg = <0 0>;
+				linux,modalias = "m25p80", "s25fl256s1";
+				spi-max-frequency = <20000000>;
+
+				partition@0 {
+					label = "u-boot";
+					reg = <0x0 0x30000>;
+					read-only;
+				};
+
+				partition@30000 {
+					label = "u-boot-env";
+					reg = <0x30000 0x10000>;
+					read-only;
+				};
+
+				factory: partition@40000 {
+					label = "factory";
+					reg = <0x40000 0x10000>;
+					read-only;
+				};
+
+				partition@50000 {
+					label = "firmware";
+					reg = <0x50000 0x1fb0000>;
+				};
+			};
+			spidev@1 {
+				#address-cells = <1>;
+				#size-cells = <1>;
+				compatible = "spidev";
+				reg = <1 0>;
+				linux,modalias = "spidev", "spidev";
+				spi-max-frequency = <10000000>;
+
+			};
+		};
+	};
+
+	ehci@101c0000 {
+		status = "okay";
+	};
+
+	ohci@101c1000 {
+		status = "okay";
+	};
+
+	ethernet@10100000 {
+		mtd-mac-address = <&factory 0x4>;
+	};
+
+	wmac@10180000 {
+		ralink,mtd-eeprom = <&factory 0>;
+	};
+
+	pinctrl {
+		state_default: pinctrl0 {
+			default {
+				ralink,group = "ephy", "wled", "pa", "wdt", "uartf", "i2c";
+				ralink,function = "gpio";
+			};
+		};
+		spi_cs1: spi {
+			spi {
+				ralink,group = "spi cs1";
+				ralink,function = "spi cs1";
+			};
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		wlan {
+			label = "tessel:amber:wlan";
+			gpios = <&gpio3 0 1>; // GPIO 72 WLED_N
+		};
+		error {
+			label = "tessel:red:error";
+			gpios = <&gpio0 17 0>; // GPIO 17 WDT_RST_N
+		};
+		user1 {
+			label = "tessel:green:user1";
+			gpios = <&gpio0 0 0>; // GPIO0
+		};
+		user2 {
+			label = "tessel:blue:user2";
+			gpios = <&gpio1 14 0>; // GPIO 38 HOLD
+		};
+		eth_link {
+			label = "tessel:yellow:eth_link";
+			gpios = <&gpio2 3 1>; // GPIO 43 TCLK
+		};
+		eth_data {
+			label = "tessel:green:eth_data";
+			gpios = <&gpio2 0 1>; // GPIO 40 TDO
+		};
+	};
+};
