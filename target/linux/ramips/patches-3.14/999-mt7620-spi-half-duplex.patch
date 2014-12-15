@@ -1,0 +1,35 @@
+--- a/drivers/spi/spi-rt2880.c
++++ b/drivers/spi/spi-rt2880.c
+@@ -288,9 +288,7 @@ rt2880_spi_write_read(struct spi_device
+ 				goto out;
+ 			}
+ 		}
+-	}
+-
+-	if (rx) {
++	} else if (rx) {
+ 		for (count = 0; count < xfer->len; count++) {
+ 			rt2880_spi_setbits(rs, RAMIPS_SPI_CTL(cs), SPICTL_STARTRD);
+ 			err = rt2880_spi_wait_till_ready(spi);
+@@ -329,6 +327,13 @@ static int rt2880_spi_transfer_one_messa
+ 			goto msg_done;
+ 		}
+ 
++		if (t->tx_buf != NULL && t->rx_buf != NULL && t->len) {
++			dev_err(&spi->dev,
++				"message rejected: full-duplex not supported\n");
++			status = -EIO;
++			goto msg_done;
++		}
++
+ 		if (t->speed_hz && t->speed_hz < (rs->sys_freq / 128)) {
+ 			dev_err(&spi->dev,
+ 				"message rejected: device min speed (%d Hz) exceeds required transfer speed (%d Hz)\n",
+@@ -479,6 +484,7 @@ static int rt2880_spi_probe(struct platf
+ 	master->bits_per_word_mask = SPI_BPW_MASK(8);
+ 	master->dev.of_node = pdev->dev.of_node;
+ 	master->num_chipselect = ops->num_cs;
++	master->flags = SPI_MASTER_HALF_DUPLEX;
+ 
+ 	dev_set_drvdata(&pdev->dev, master);
+ 
