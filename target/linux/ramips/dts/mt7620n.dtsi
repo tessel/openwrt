@@ -155,7 +155,7 @@
 		};
 
 		spi@b00 {
-			compatible = "ralink,mt7620a-spi", "ralink,rt2880-spi";
+			compatible = "ralink,mt7620a-spi", "ralink,rt5350-spi", "ralink,rt2880-spi";
 			reg = <0xb00 0x100>;
 
 			resets = <&rstctrl 18>;
