@@ -341,6 +341,14 @@ define Device/wrtnode
 endef
 TARGET_DEVICES += wrtnode
 
+define Device/tessel
+  DTS := Tessel
+  IMAGE_SIZE := $(ralink_default_fw_size_32M)
+  DEVICE_TITLE := Tessel 2
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-spi-dev
+endef
+TARGET_DEVICES += tessel
+
 define Device/miwifi-mini
   DTS := MIWIFI-MINI
   IMAGE_SIZE := $(ralink_default_fw_size_16M)

@@ -1,0 +1,12 @@
+Index: linux-4.4.61/drivers/spi/spidev.c
+===================================================================
+--- linux-4.4.61.orig/drivers/spi/spidev.c	2017-05-14 00:43:55.586211000 -0400
++++ linux-4.4.61/drivers/spi/spidev.c	2017-05-14 14:14:56.706211000 -0400
+@@ -696,6 +696,7 @@
+ 	{ .compatible = "rohm,dh2228fv" },
+ 	{ .compatible = "lineartechnology,ltc2488" },
+ 	{ .compatible = "siliconlabs,si3210" },
++	{ .compatible = "tessel,t2-samd21" },
+ 	{},
+ };
+ MODULE_DEVICE_TABLE(of, spidev_dt_ids);

@@ -304,6 +304,9 @@ rt-n14u)
 	set_wifi_led "$board:blue:air"
 	set_usb_led "$board:blue:usb"
 	;;
+tessel)
+        set_wifi_led "$board:amber:wlan"
+        ucidef_set_led_netdev "eth" "ETH" "$board:green:eth_data" "eth0"
 tew-714tru)
 	set_usb_led "$board:red:usb"
 	set_wifi_led "$board:green:wifi"
