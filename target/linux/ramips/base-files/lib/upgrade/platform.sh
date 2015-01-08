@@ -90,6 +90,7 @@ platform_check_image() {
 	rt-n56u | \
 	rut5xx | \
 	sl-r7205 | \
+	tessel | \
 	tew-691gr | \
 	tew-692gr | \
 	ur-326n4g |\
