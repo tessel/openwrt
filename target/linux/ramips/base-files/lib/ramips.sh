@@ -310,6 +310,9 @@ ramips_board_detect() {
 	*"Sparklan WCR-150GN")
 		name="wcr-150gn"
 		;;
+	*"Tessel")
+		name="tessel"
+		;;
 	*"V22RW-2X2")
 		name="v22rw-2x2"
 		;;
