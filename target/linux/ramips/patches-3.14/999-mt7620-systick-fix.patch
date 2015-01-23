@@ -1,0 +1,11 @@
+--- a/arch/mips/ralink/cevt-rt3352.c
++++ b/arch/mips/ralink/cevt-rt3352.c
+@@ -53,7 +53,7 @@ static int systick_next_event(unsigned l
+ 
+ 	sdev = container_of(evt, struct systick_device, dev);
+ 	count = ioread32(sdev->membase + SYSTICK_COUNT);
+-	count = (count + delta) % SYSTICK_FREQ;
++	count = (count + delta) & 0xffff;
+ 	iowrite32(count + delta, sdev->membase + SYSTICK_COMPARE);
+ 
+ 	return 0;
