@@ -98,4 +98,32 @@
 			};
 		};
 	};
+
+	leds {
+		compatible = "gpio-leds";
+		wlan {
+			label = "tessel:amber:wlan";
+			gpios = <&gpio3 0 1>; // GPIO 72 WLED_N
+		};
+		error {
+			label = "tessel:red:error";
+			gpios = <&gpio0 17 0>; // GPIO 17 WDT_RST_N
+		};
+		user1 {
+			label = "tessel:green:user1";
+			gpios = <&gpio0 0 0>; // GPIO0
+		};
+		user2 {
+			label = "tessel:blue:user2";
+			gpios = <&gpio1 14 0>; // GPIO 38 HOLD
+		};
+		eth_link {
+			label = "tessel:yellow:eth_link";
+			gpios = <&gpio2 3 1>; // GPIO 43 TCLK
+		};
+		eth_data {
+			label = "tessel:green:eth_data";
+			gpios = <&gpio2 0 1>; // GPIO 40 TDO
+		};
+	};
 };
