@@ -187,6 +187,10 @@ case $board in
 	sl-r7205)
 		set_wifi_led "rt2800pci-phy0::radio"
 		;;
+	tessel)
+		set_wifi_led "tessel:amber:wlan"
+		ucidef_set_led_netdev "eth" "ETH" "tessel:green:eth_data" "eth0"
+		;;
 	v11st-fe)
 		set_wifi_led "rt2800pci-phy0::radio"
 		;;
