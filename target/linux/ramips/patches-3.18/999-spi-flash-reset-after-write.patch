@@ -1,0 +1,14 @@
+--- a/drivers/mtd/spi-nor/spi-nor.c
++++ b/drivers/mtd/spi-nor/spi-nor.c
+@@ -810,6 +810,11 @@ static int spi_nor_write(struct mtd_info
+ 		}
+ 	}
+ 
++	/* Wait until the write completes. */
++	ret = wait_till_ready(nor);
++	if (ret)
++		goto write_err;
++
+ write_err:
+ 	spi_nor_unlock_and_unprep(nor, SPI_NOR_OPS_WRITE);
+ 	return 0;
