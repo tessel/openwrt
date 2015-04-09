@@ -1,0 +1,10 @@
+--- a/drivers/spi/spi-rt2880.c
++++ b/drivers/spi/spi-rt2880.c
+@@ -258,7 +258,6 @@ static inline int rt2880_spi_wait_till_r
+ 			return 0;
+ 
+ 		cpu_relax();
+-		udelay(1);
+ 	}
+ 
+ 	return -ETIMEDOUT;
