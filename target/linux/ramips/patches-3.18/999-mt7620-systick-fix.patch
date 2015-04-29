@@ -6,6 +6,6 @@
  	count = ioread32(sdev->membase + SYSTICK_COUNT);
 -	count = (count + delta) % SYSTICK_FREQ;
 +	count = (count + delta) & 0xffff;
- 	iowrite32(count + delta, sdev->membase + SYSTICK_COMPARE);
+ 	iowrite32(count, sdev->membase + SYSTICK_COMPARE);
  
  	return 0;
