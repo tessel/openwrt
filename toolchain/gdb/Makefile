@@ -13,7 +13,8 @@ PKG_VERSION:=linaro-$(PKG_REV)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_MD5SUM:=816290b91cff03912320089d353e8a12
-PKG_SOURCE_URL:=https://releases.linaro.org/13.05/components/toolchain/gdb-linaro/
+#PKG_SOURCE_URL:=https://releases.linaro.org/13.05/components/toolchain/gdb-linaro/
+PKG_SOURCE_URL:=https://launchpad.net/gdb-linaro/7.6/7.6-2013.05/+download/
 
 HOST_BUILD_PARALLEL:=1
 
