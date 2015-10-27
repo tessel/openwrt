@@ -20,6 +20,7 @@ PKG_LICENSE:=BZIP2
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/host-build.mk
 
 define Package/bzip2/Default
   SUBMENU:=Compression
@@ -72,6 +73,17 @@ define Build/InstallDev
 	$(LN) libbz2.so.$(PKG_VERSION) $(1)/usr/lib/libbz2.so
 endef
 
+HOST_MAKE_FLAGS += -f Makefile-libbz2_so
+
+define Host/Install
+	$(INSTALL_DIR) $(STAGING_DIR_HOST)/usr/include
+	$(CP) $(HOST_BUILD_DIR)/bzlib.h $(STAGING_DIR_HOST)/usr/include/
+	$(INSTALL_DIR) $(STAGING_DIR_HOST)/usr/lib
+	$(CP) $(HOST_BUILD_DIR)/libbz2.so.$(PKG_VERSION) $(STAGING_DIR_HOST)/usr/lib/
+	$(LN) libbz2.so.$(PKG_VERSION) $(STAGING_DIR_HOST)/usr/lib/libbz2.so.1.0
+	$(LN) libbz2.so.$(PKG_VERSION) $(STAGING_DIR_HOST)/usr/lib/libbz2.so
+endef
+
 define Package/libbz2/install
 	$(INSTALL_DIR) $(1)/usr/lib/
 	$(CP) $(PKG_BUILD_DIR)/libbz2.so.$(PKG_VERSION) $(1)/usr/lib/
@@ -83,5 +95,6 @@ define Package/bzip2/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bzip2-shared $(1)/usr/bin/bzip2
 endef
 
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,libbz2))
 $(eval $(call BuildPackage,bzip2))
