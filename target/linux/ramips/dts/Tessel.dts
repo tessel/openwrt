@@ -62,7 +62,7 @@
 				compatible = "spidev";
 				reg = <1 0>;
 				linux,modalias = "spidev", "spidev";
-				spi-max-frequency = <10000000>;
+				spi-max-frequency = <25000000>;
 
 			};
 		};
