@@ -171,10 +171,10 @@ foreach my $mirror (@ARGV) {
 			push @extra, "$extra[0]/testing";
 		} elsif ($filename =~ /linux-(\d+\.\d+(?:\.\d+)?)/) {
 			push @extra, "$extra[0]/longterm/v$1";
-		}		
+		}
 		foreach my $dir (@extra) {
-			push @mirrors, "ftp://ftp.all.kernel.org/pub/$dir";
-			push @mirrors, "http://ftp.all.kernel.org/pub/$dir";
+			push @mirrors, "https://kernel.org/pub/$dir";
+			push @mirrors, "ftp://kernel.org/pub/$dir";
 		}
     } elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
 		push @mirrors, "http://ftp.gnome.org/pub/GNOME/sources/$1";
