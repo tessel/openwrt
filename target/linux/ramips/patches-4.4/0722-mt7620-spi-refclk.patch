@@ -1,0 +1,25 @@
+Index: linux-4.4.61/arch/mips/ralink/mt7620.c
+===================================================================
+--- linux-4.4.61.orig/arch/mips/ralink/mt7620.c	2017-05-14 00:44:00.406211000 -0400
++++ linux-4.4.61/arch/mips/ralink/mt7620.c	2017-05-14 00:44:58.150211000 -0400
+@@ -60,7 +60,10 @@
+ 	FUNC("refclk", MT7620_GPIO_MODE_MDIO_REFCLK, 22, 2),
+ };
+ static struct rt2880_pmx_func rgmii1_grp[] = { FUNC("rgmii1", 0, 24, 12) };
+-static struct rt2880_pmx_func refclk_grp[] = { FUNC("spi refclk", 0, 37, 3) };
++static struct rt2880_pmx_func spi_cs1_grp[] = {
++	FUNC("spi cs1", 0, 37, 1),
++	FUNC("spi refclk", 1, 37, 1)
++};
+ static struct rt2880_pmx_func ephy_grp[] = { FUNC("ephy", 0, 40, 5) };
+ static struct rt2880_pmx_func rgmii2_grp[] = { FUNC("rgmii2", 0, 60, 12) };
+ static struct rt2880_pmx_func wled_grp[] = { FUNC("wled", 0, 72, 1) };
+@@ -98,7 +101,7 @@
+ 	GRP_G("mdio", mdio_grp, MT7620_GPIO_MODE_MDIO_MASK,
+ 		MT7620_GPIO_MODE_MDIO_GPIO, MT7620_GPIO_MODE_MDIO_SHIFT),
+ 	GRP("rgmii1", rgmii1_grp, 1, MT7620_GPIO_MODE_RGMII1),
+-	GRP("spi refclk", refclk_grp, 1, MT7620_GPIO_MODE_SPI_REF_CLK),
++	GRP("spi cs1", spi_cs1_grp, 1, MT7620_GPIO_MODE_SPI_REF_CLK),
+ 	GRP_G("pcie", pcie_rst_grp, MT7620_GPIO_MODE_PCIE_MASK,
+ 		MT7620_GPIO_MODE_PCIE_GPIO, MT7620_GPIO_MODE_PCIE_SHIFT),
+ 	GRP_G("nd_sd", nd_sd_grp, MT7620_GPIO_MODE_ND_SD_MASK,
